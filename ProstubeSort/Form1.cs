@@ -17,6 +17,11 @@ namespace ProstubeSort
                 panel_ButtonExceptMy.Enabled = true;
                 button_scan.Enabled = true;
                 button_sort.Enabled = true;
+                if (wayBox.Text.StartsWith("C"))
+                {
+                    MessageBox.Show("Нельзя выбирать корневые папки!");
+                    wayBox.Text = null;
+                }
             }
         }
         private void button_result_Click(object sender, EventArgs e)
@@ -25,24 +30,14 @@ namespace ProstubeSort
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 wayBox_result.Text = folderBrowserDialog1.SelectedPath;
-            }
-        }
-        #endregion
-
-        void filesScan(string[] strType)
-        {
-            if (PhotosCheck.Checked)
-            {
-                string[] photos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
-                foreach (string expansionPhotos in photos)
+                if (wayBox_result.Text.StartsWith("C"))
                 {
-                    foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionPhotos, SearchOption.AllDirectories))
-                    {
-                        OutDataListBox.Items.Add(file);
-                    }
+                    MessageBox.Show("Нельзя выбирать корневые папки!");
+                    wayBox_result.Text = null;
                 }
             }
         }
+        #endregion
 
         #region Сканирование
         private void button_scan_Click(object sender, EventArgs e)
