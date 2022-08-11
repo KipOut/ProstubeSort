@@ -1,3 +1,5 @@
+using System.Media;
+
 namespace ProstubeSort
 {
     public partial class MainForm : Form
@@ -19,7 +21,11 @@ namespace ProstubeSort
                 button_sort.Enabled = true;
                 if (wayBox.Text.StartsWith("C"))
                 {
-                    MessageBox.Show("Нельзя выбирать корневые папки!");
+                    SystemSounds.Hand.Play();
+                    MessageBox.Show("Нельзя выбирать корневые папки!", "Сообщение",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1);
                     wayBox.Text = null;
                 }
             }
@@ -32,7 +38,11 @@ namespace ProstubeSort
                 wayBox_result.Text = folderBrowserDialog1.SelectedPath;
                 if (wayBox_result.Text.StartsWith("C"))
                 {
-                    MessageBox.Show("Нельзя выбирать корневые папки!");
+                    SystemSounds.Hand.Play();
+                    MessageBox.Show("Нельзя выбирать корневые папки!", "Сообщение",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1);
                     wayBox_result.Text = null;
                 }
             }

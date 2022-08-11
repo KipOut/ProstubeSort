@@ -37,6 +37,7 @@
             this.panel_all = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel_ButtonExceptMy = new System.Windows.Forms.Panel();
+            this.checkActBroker = new System.Windows.Forms.CheckBox();
             this.BrokerAudioCheck = new System.Windows.Forms.CheckBox();
             this.BrokerVideoCheck = new System.Windows.Forms.CheckBox();
             this.DocCheck = new System.Windows.Forms.CheckBox();
@@ -59,13 +60,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button_review = new System.Windows.Forms.Button();
             this.wayBox = new System.Windows.Forms.TextBox();
-            this.checkActBroker = new System.Windows.Forms.CheckBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.panel_all.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel_ButtonExceptMy.SuspendLayout();
             this.panel_buttonFiles.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -151,6 +153,18 @@
             this.panel_ButtonExceptMy.Name = "panel_ButtonExceptMy";
             this.panel_ButtonExceptMy.Size = new System.Drawing.Size(519, 53);
             this.panel_ButtonExceptMy.TabIndex = 12;
+            // 
+            // checkActBroker
+            // 
+            this.checkActBroker.AutoSize = true;
+            this.checkActBroker.Location = new System.Drawing.Point(347, 28);
+            this.checkActBroker.Name = "checkActBroker";
+            this.checkActBroker.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkActBroker.Size = new System.Drawing.Size(31, 19);
+            this.checkActBroker.TabIndex = 10;
+            this.checkActBroker.Text = "-";
+            this.checkActBroker.UseVisualStyleBackColor = true;
+            this.checkActBroker.CheckedChanged += new System.EventHandler(this.checkActBroker_CheckedChanged);
             // 
             // BrokerAudioCheck
             // 
@@ -375,17 +389,15 @@
             this.wayBox.Size = new System.Drawing.Size(427, 23);
             this.wayBox.TabIndex = 1;
             // 
-            // checkActBroker
+            // pictureBox1
             // 
-            this.checkActBroker.AutoSize = true;
-            this.checkActBroker.Location = new System.Drawing.Point(347, 28);
-            this.checkActBroker.Name = "checkActBroker";
-            this.checkActBroker.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkActBroker.Size = new System.Drawing.Size(31, 19);
-            this.checkActBroker.TabIndex = 10;
-            this.checkActBroker.Text = "-";
-            this.checkActBroker.UseVisualStyleBackColor = true;
-            this.checkActBroker.CheckedChanged += new System.EventHandler(this.checkActBroker_CheckedChanged);
+            this.pictureBox1.Image = global::ProstubeSort.Properties.Resources.kisspng_electric_blue_graphic_design_angle_area_public_5ab062b5c26c20_6651072415215090457964;
+            this.pictureBox1.Location = new System.Drawing.Point(467, 4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(65, 51);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
@@ -394,6 +406,7 @@
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(546, 576);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.OutDataListBox);
             this.Controls.Add(this.panel_all);
             this.Controls.Add(this.menuStrip1);
@@ -415,6 +428,7 @@
             this.panel_buttonFiles.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -452,5 +466,6 @@
         private CheckBox BrokerVideoCheck;
         private CheckBox BrokerAudioCheck;
         private CheckBox checkActBroker;
+        private PictureBox pictureBox1;
     }
 }
