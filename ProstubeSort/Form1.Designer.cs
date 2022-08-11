@@ -76,7 +76,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(112, 0);
+            this.label1.Location = new System.Drawing.Point(112, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(323, 25);
             this.label1.TabIndex = 2;
@@ -94,19 +94,18 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button_Start);
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(5, 27);
+            this.panel1.Location = new System.Drawing.Point(5, 58);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(534, 232);
+            this.panel1.Size = new System.Drawing.Size(534, 143);
             this.panel1.TabIndex = 4;
             // 
             // button_Start
             // 
             this.button_Start.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button_Start.Location = new System.Drawing.Point(199, 188);
+            this.button_Start.Location = new System.Drawing.Point(199, 207);
             this.button_Start.Name = "button_Start";
             this.button_Start.Size = new System.Drawing.Size(137, 37);
             this.button_Start.TabIndex = 6;
@@ -116,7 +115,6 @@
             // 
             // panel3
             // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.BrokerPhotosCheck);
             this.panel3.Controls.Add(this.ZipCheck);
             this.panel3.Controls.Add(this.VideoCheck);
@@ -125,7 +123,7 @@
             this.panel3.Controls.Add(this.DocCheck);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.PhotosCheck);
-            this.panel3.Location = new System.Drawing.Point(7, 112);
+            this.panel3.Location = new System.Drawing.Point(12, 71);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(519, 70);
             this.panel3.TabIndex = 5;
@@ -211,11 +209,10 @@
             // 
             // panel2
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.button_review);
             this.panel2.Controls.Add(this.wayBox);
-            this.panel2.Location = new System.Drawing.Point(7, 44);
+            this.panel2.Location = new System.Drawing.Point(12, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(519, 59);
             this.panel2.TabIndex = 4;
@@ -236,6 +233,10 @@
             this.gitHubToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.gitHubToolStripMenuItem.Text = "GitHub";
             // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.ShowNewFolderButton = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -243,8 +244,10 @@
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(546, 261);
+            this.Controls.Add(this.button_Start);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
@@ -252,7 +255,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProstubeSort";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
