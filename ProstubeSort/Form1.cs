@@ -14,6 +14,7 @@ namespace ProstubeSort
             {
                 wayBox.Text = folderBrowserDialog1.SelectedPath;
                 panel_buttonFiles.Enabled = true;
+                panel_ButtonExceptMy.Enabled = true;
                 button_scan.Enabled = true;
                 button_sort.Enabled = true;
             }
@@ -27,6 +28,21 @@ namespace ProstubeSort
             }
         }
         #endregion
+
+        void filesScan(string[] strType)
+        {
+            if (PhotosCheck.Checked)
+            {
+                string[] photos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
+                foreach (string expansionPhotos in photos)
+                {
+                    foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionPhotos, SearchOption.AllDirectories))
+                    {
+                        OutDataListBox.Items.Add(file);
+                    }
+                }
+            }
+        }
 
         #region Сканирование
         private void button_scan_Click(object sender, EventArgs e)
@@ -62,11 +78,11 @@ namespace ProstubeSort
                 }
                 #endregion
 
-                #region Музыка
-                if (MusicCheck.Checked)
+                #region Аудио
+                if (AudioCheck.Checked)
                 {
-                    string[] music = { "*.mp3", "*.wav", "*.midi", "*.aac" };
-                    foreach (string expansionMusic in music)
+                    string[] BrokerAudio = { "*.mp3", "*.wav", "*.midi", "*.aac" };
+                    foreach (string expansionMusic in BrokerAudio)
                     {
                         foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionMusic, SearchOption.AllDirectories))
                         {
@@ -115,24 +131,84 @@ namespace ProstubeSort
                 #endregion
 
                 #region Битые фотографии
-                if (PhotosCheck.Checked)
+                if (BrokerPhotosCheck.Checked)
                 {
-                    string[] photos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
-                    //foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", SearchOption.AllDirectories))
+                    string[] BrokerPhotos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
+                    foreach (string typePhoto in BrokerPhotos)
                     {
-                        try
+                        foreach (string file in Directory.EnumerateFiles(folderBrowserDialog1.SelectedPath, typePhoto, SearchOption.AllDirectories))
                         {
-                            //using (Bitmap jpg = new Bitmap(file))
+                            try
                             {
-
+                                using (Bitmap type = new Bitmap(file))
+                                {
+                                }
                             }
-                        }
-                        catch (ArgumentException)
-                        {
-                            //OutDataListBox.Items.Add(file);
+                            catch (ArgumentException)
+                            {
+                                OutDataListBox.Items.Add(file);
+                            }
                         }
                     }
 
+                }
+                #endregion
+
+                #region Битые видео
+                if (BrokerVideoCheck.Checked)
+                {
+                    string[] BrokerVideo = { "*.mp4", "*.avi", "*.mkv", "*.wmv", "*.mkv", "*.flv", "mpeg" };
+                    foreach (string typePhoto in BrokerVideo)
+                    {
+                        foreach (string file in Directory.EnumerateFiles(folderBrowserDialog1.SelectedPath, typePhoto, SearchOption.AllDirectories))
+                        {
+                            try
+                            {
+                                using (Bitmap type = new Bitmap(file))
+                                {
+                                }
+                            }
+                            catch (ArgumentException)
+                            {
+                                OutDataListBox.Items.Add(file);
+                            }
+                        }
+                    }
+
+                }
+                #endregion
+
+                #region Битые аудио
+                if (BrokerVideoCheck.Checked)
+                {
+                    string[] BrokerAudio = {  };
+                    foreach (string typePhoto in BrokerAudio)
+                    {
+                        foreach (string file in Directory.EnumerateFiles(folderBrowserDialog1.SelectedPath, typePhoto, SearchOption.AllDirectories))
+                        {
+                            try
+                            {
+                                using (Bitmap type = new Bitmap(file))
+                                {
+                                }
+                            }
+                            catch (ArgumentException)
+                            {
+                                OutDataListBox.Items.Add(file);
+                            }
+                        }
+                    }
+
+                }
+                #endregion
+
+                #region Свое расширение
+                if (MyCheck.Checked)
+                {
+                    foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", $"*.{MyBox.Text}", SearchOption.AllDirectories))
+                    {
+                        OutDataListBox.Items.Add(file);
+                    }
                 }
                 #endregion
 
@@ -172,5 +248,69 @@ namespace ProstubeSort
 
         #endregion
 
+        private void MyCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (MyCheck.Checked)
+            {
+                panel_ButtonExceptMy.Enabled = false;
+                PhotosCheck.Checked = false;
+                DocCheck.Checked = false;
+                AudioCheck.Checked = false;
+                TxtCheck.Checked = false;
+                VideoCheck.Checked = false;
+                ZipCheck.Checked = false;
+                BrokerAudioCheck.Checked = false;
+                BrokerVideoCheck.Checked = false;
+                BrokerPhotosCheck.Checked = false;
+                MyBox.Enabled = true;
+                checkActBroker.Checked = false;
+            }
+            else
+            {
+                panel_ButtonExceptMy.Enabled = true;
+                MyBox.Enabled = false;
+                MyBox.Text = null;
+            }
+        }
+
+        private void checkActBroker_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkActBroker.Checked)
+            {
+                PhotosCheck.Checked = false;
+                DocCheck.Checked = false;
+                AudioCheck.Checked = false;
+                TxtCheck.Checked = false;
+                VideoCheck.Checked = false;
+                ZipCheck.Checked = false;
+                PhotosCheck.Enabled = false;
+                DocCheck.Enabled = false;
+                AudioCheck.Enabled = false;
+                TxtCheck.Enabled = false;
+                VideoCheck.Enabled = false;
+                ZipCheck.Enabled = false;
+                BrokerAudioCheck.Enabled = true;
+                BrokerVideoCheck.Enabled = true;
+                BrokerPhotosCheck.Enabled = true;
+                MyCheck.Checked = false;
+                MyBox.Enabled = false;
+                MyBox.Text = null;
+            }
+            else
+            {
+                PhotosCheck.Enabled = true;
+                DocCheck.Enabled = true;
+                AudioCheck.Enabled = true;
+                TxtCheck.Enabled = true;
+                VideoCheck.Enabled = true;
+                ZipCheck.Enabled = true;
+                BrokerAudioCheck.Enabled = false;
+                BrokerVideoCheck.Enabled = false;
+                BrokerPhotosCheck.Enabled = false;
+                BrokerAudioCheck.Checked = false;
+                BrokerVideoCheck.Checked = false;
+                BrokerPhotosCheck.Checked = false;
+            }
+        }
     }
 }
