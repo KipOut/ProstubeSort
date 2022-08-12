@@ -8,6 +8,25 @@ namespace ProstubeSort
         {
             InitializeComponent();
         }
+
+        #region Предупреждение об использовании директории C
+        void WarningC()
+        {
+            SystemSounds.Hand.Play();
+            DialogResult nameBox = MessageBox.Show("Использовать корневую директорию?", "Сообщение",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Error,
+                MessageBoxDefaultButton.Button1);
+            if (nameBox == DialogResult.No)
+                wayBox.Text = null;
+            if (nameBox == DialogResult.Yes)
+                MessageBox.Show("Вся ответственность переходит на вас", "Сообщение",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button1);
+        }
+        #endregion
+
         #region Выбор папки для сортировки
         private void button_review_Click(object sender, EventArgs e)
         {
@@ -21,12 +40,7 @@ namespace ProstubeSort
                 button_sort.Enabled = true;
                 if (wayBox.Text.StartsWith("C"))
                 {
-                    SystemSounds.Hand.Play();
-                    MessageBox.Show("Нельзя выбирать корневые папки!", "Сообщение",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error,
-                        MessageBoxDefaultButton.Button1);
-                    wayBox.Text = null;
+                    WarningC();
                 }
             }
         }
@@ -38,12 +52,7 @@ namespace ProstubeSort
                 wayBox_result.Text = folderBrowserDialog1.SelectedPath;
                 if (wayBox_result.Text.StartsWith("C"))
                 {
-                    SystemSounds.Hand.Play();
-                    MessageBox.Show("Нельзя выбирать корневые папки!", "Сообщение",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error,
-                        MessageBoxDefaultButton.Button1);
-                    wayBox_result.Text = null;
+                    WarningC();
                 }
             }
         }
@@ -220,7 +229,11 @@ namespace ProstubeSort
             }
             else
             {
-                MessageBox.Show("Ошибка");
+                SystemSounds.Hand.Play();
+                DialogResult nameBox = MessageBox.Show("Не выбраны директории", "Сообщение",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
             }
 
         }
@@ -229,26 +242,68 @@ namespace ProstubeSort
         #region Сортировка
         private void button_sort_Click(object sender, EventArgs e)
         {
-            #region Фотографии
-            #endregion
+            OutDataListBox.Items.Clear();
+            if (wayBox.Text.Length != 0 && wayBox_result.Text.Length != 0)
+            {
+                #region Фотографии
+                if (PhotosCheck.Checked)
+                {
+                    Directory.CreateDirectory($@"{wayBox_result.Text}\Photos");
+                    string[] photos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
+                    foreach (string expansionPhotos in photos)
+                    {
+                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionPhotos, SearchOption.AllDirectories))
+                        {
+                            try
+                            {
+                                string result = Path.GetFileName(file);
+                                File.Move(file, $@"{wayBox_result.Text}\Photos\{result}");
+                                OutDataListBox.Items.Add($"Успешно: {file}");
+                            }
+                            catch
+                            {
+                                OutDataListBox.Items.Add($"Ошибка: {file}");
+                                string result = Path.GetFileName(file);
+                                SystemSounds.Hand.Play();
+                                DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning,
+                                    MessageBoxDefaultButton.Button1);
+                            }
+                        }
+                    }
+                }
+                #endregion
 
-            #region Документы
-            #endregion
+                #region Документы
+                #endregion
 
-            #region Музыка
-            #endregion
+                #region Музыка
+                #endregion
 
-            #region TXT
-            #endregion
+                #region TXT
+                #endregion
 
-            #region Видео
-            #endregion
+                #region Видео
+                #endregion
 
-            #region Архивы
-            #endregion
+                #region Архивы
+                #endregion
 
-            #region Битые фотографии
-            #endregion
+                #region Битые фотографии
+                #endregion
+
+                #region Битые Аудио
+                #endregion
+            }
+            else
+            {
+                SystemSounds.Hand.Play();
+                DialogResult nameBox = MessageBox.Show("Не выбраны директории", "Сообщение",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+            }
         }
 
         #endregion
@@ -316,6 +371,16 @@ namespace ProstubeSort
                 BrokerVideoCheck.Checked = false;
                 BrokerPhotosCheck.Checked = false;
             }
+        }
+
+        private void wayBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BrokerPhotosCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            File.Move($@"C:\Users\netbo\Desktop\Test\434.txt", $@"C:\Users\netbo\Desktop\Test\Photos\434.txt");
         }
     }
 }
