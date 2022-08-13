@@ -38,21 +38,25 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.panel_ButtonExceptMy = new System.Windows.Forms.Panel();
-            this.checkActBroker = new System.Windows.Forms.CheckBox();
-            this.BrokerAudioCheck = new System.Windows.Forms.CheckBox();
-            this.BrokerVideoCheck = new System.Windows.Forms.CheckBox();
+            this.PresentCheck = new System.Windows.Forms.CheckBox();
+            this.PdfCheck = new System.Windows.Forms.CheckBox();
+            this.TableCheck = new System.Windows.Forms.CheckBox();
+            this.TorrentCheck = new System.Windows.Forms.CheckBox();
+            this.HtmlCheck = new System.Windows.Forms.CheckBox();
+            this.PsdCheck = new System.Windows.Forms.CheckBox();
             this.DocCheck = new System.Windows.Forms.CheckBox();
             this.PhotosCheck = new System.Windows.Forms.CheckBox();
             this.AudioCheck = new System.Windows.Forms.CheckBox();
             this.BrokerPhotosCheck = new System.Windows.Forms.CheckBox();
             this.TxtCheck = new System.Windows.Forms.CheckBox();
-            this.ZipCheck = new System.Windows.Forms.CheckBox();
+            this.ZipFilesCheck = new System.Windows.Forms.CheckBox();
             this.VideoCheck = new System.Windows.Forms.CheckBox();
             this.button_sort = new System.Windows.Forms.Button();
             this.button_result = new System.Windows.Forms.Button();
             this.button_scan = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.panel_buttonFiles = new System.Windows.Forms.Panel();
+            this.AllCheck = new System.Windows.Forms.CheckBox();
             this.MyCheck = new System.Windows.Forms.CheckBox();
             this.MyBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -75,7 +79,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(128, 32);
+            this.label1.Location = new System.Drawing.Point(107, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(410, 32);
             this.label1.TabIndex = 2;
@@ -110,7 +114,7 @@
             this.OutDataListBox.HorizontalExtent = 3000;
             this.OutDataListBox.HorizontalScrollbar = true;
             this.OutDataListBox.ItemHeight = 20;
-            this.OutDataListBox.Location = new System.Drawing.Point(3, 473);
+            this.OutDataListBox.Location = new System.Drawing.Point(6, 517);
             this.OutDataListBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.OutDataListBox.Name = "OutDataListBox";
             this.OutDataListBox.Size = new System.Drawing.Size(610, 284);
@@ -122,7 +126,7 @@
             this.panel_all.Location = new System.Drawing.Point(6, 81);
             this.panel_all.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel_all.Name = "panel_all";
-            this.panel_all.Size = new System.Drawing.Size(618, 384);
+            this.panel_all.Size = new System.Drawing.Size(618, 428);
             this.panel_all.TabIndex = 10;
             // 
             // panel1
@@ -140,13 +144,13 @@
             this.panel1.Location = new System.Drawing.Point(0, 4);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(610, 379);
+            this.panel1.Size = new System.Drawing.Size(610, 424);
             this.panel1.TabIndex = 4;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(168, 246);
+            this.label5.Location = new System.Drawing.Point(170, 292);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(290, 20);
             this.label5.TabIndex = 13;
@@ -154,64 +158,96 @@
             // 
             // panel_ButtonExceptMy
             // 
-            this.panel_ButtonExceptMy.Controls.Add(this.checkActBroker);
-            this.panel_ButtonExceptMy.Controls.Add(this.BrokerAudioCheck);
-            this.panel_ButtonExceptMy.Controls.Add(this.BrokerVideoCheck);
+            this.panel_ButtonExceptMy.Controls.Add(this.PresentCheck);
+            this.panel_ButtonExceptMy.Controls.Add(this.PdfCheck);
+            this.panel_ButtonExceptMy.Controls.Add(this.TableCheck);
+            this.panel_ButtonExceptMy.Controls.Add(this.TorrentCheck);
+            this.panel_ButtonExceptMy.Controls.Add(this.HtmlCheck);
+            this.panel_ButtonExceptMy.Controls.Add(this.PsdCheck);
             this.panel_ButtonExceptMy.Controls.Add(this.DocCheck);
             this.panel_ButtonExceptMy.Controls.Add(this.PhotosCheck);
             this.panel_ButtonExceptMy.Controls.Add(this.AudioCheck);
             this.panel_ButtonExceptMy.Controls.Add(this.BrokerPhotosCheck);
             this.panel_ButtonExceptMy.Controls.Add(this.TxtCheck);
-            this.panel_ButtonExceptMy.Controls.Add(this.ZipCheck);
+            this.panel_ButtonExceptMy.Controls.Add(this.ZipFilesCheck);
             this.panel_ButtonExceptMy.Controls.Add(this.VideoCheck);
             this.panel_ButtonExceptMy.Enabled = false;
             this.panel_ButtonExceptMy.Location = new System.Drawing.Point(14, 79);
             this.panel_ButtonExceptMy.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel_ButtonExceptMy.Name = "panel_ButtonExceptMy";
-            this.panel_ButtonExceptMy.Size = new System.Drawing.Size(593, 71);
+            this.panel_ButtonExceptMy.Size = new System.Drawing.Size(593, 131);
             this.panel_ButtonExceptMy.TabIndex = 12;
             // 
-            // checkActBroker
+            // PresentCheck
             // 
-            this.checkActBroker.AutoSize = true;
-            this.checkActBroker.Location = new System.Drawing.Point(397, 37);
-            this.checkActBroker.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.checkActBroker.Name = "checkActBroker";
-            this.checkActBroker.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkActBroker.Size = new System.Drawing.Size(37, 24);
-            this.checkActBroker.TabIndex = 10;
-            this.checkActBroker.Text = "-";
-            this.checkActBroker.UseVisualStyleBackColor = true;
-            this.checkActBroker.CheckedChanged += new System.EventHandler(this.checkActBroker_CheckedChanged);
+            this.PresentCheck.AutoSize = true;
+            this.PresentCheck.Location = new System.Drawing.Point(463, 36);
+            this.PresentCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.PresentCheck.Name = "PresentCheck";
+            this.PresentCheck.Size = new System.Drawing.Size(124, 24);
+            this.PresentCheck.TabIndex = 16;
+            this.PresentCheck.Text = "Презентации";
+            this.PresentCheck.UseVisualStyleBackColor = true;
             // 
-            // BrokerAudioCheck
+            // PdfCheck
             // 
-            this.BrokerAudioCheck.AutoSize = true;
-            this.BrokerAudioCheck.Enabled = false;
-            this.BrokerAudioCheck.Location = new System.Drawing.Point(283, 37);
-            this.BrokerAudioCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.BrokerAudioCheck.Name = "BrokerAudioCheck";
-            this.BrokerAudioCheck.Size = new System.Drawing.Size(119, 24);
-            this.BrokerAudioCheck.TabIndex = 9;
-            this.BrokerAudioCheck.Text = "Битые аудио";
-            this.BrokerAudioCheck.UseVisualStyleBackColor = true;
+            this.PdfCheck.AutoSize = true;
+            this.PdfCheck.Location = new System.Drawing.Point(318, 36);
+            this.PdfCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.PdfCheck.Name = "PdfCheck";
+            this.PdfCheck.Size = new System.Drawing.Size(139, 24);
+            this.PdfCheck.TabIndex = 15;
+            this.PdfCheck.Text = "PDF-документы";
+            this.PdfCheck.UseVisualStyleBackColor = true;
             // 
-            // BrokerVideoCheck
+            // TableCheck
             // 
-            this.BrokerVideoCheck.AutoSize = true;
-            this.BrokerVideoCheck.Enabled = false;
-            this.BrokerVideoCheck.Location = new System.Drawing.Point(168, 37);
-            this.BrokerVideoCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.BrokerVideoCheck.Name = "BrokerVideoCheck";
-            this.BrokerVideoCheck.Size = new System.Drawing.Size(120, 24);
-            this.BrokerVideoCheck.TabIndex = 8;
-            this.BrokerVideoCheck.Text = "Битые видео";
-            this.BrokerVideoCheck.UseVisualStyleBackColor = true;
+            this.TableCheck.AutoSize = true;
+            this.TableCheck.Location = new System.Drawing.Point(124, 36);
+            this.TableCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TableCheck.Name = "TableCheck";
+            this.TableCheck.Size = new System.Drawing.Size(188, 24);
+            this.TableCheck.TabIndex = 14;
+            this.TableCheck.Text = "Электронные таблицы";
+            this.TableCheck.UseVisualStyleBackColor = true;
+            // 
+            // TorrentCheck
+            // 
+            this.TorrentCheck.AutoSize = true;
+            this.TorrentCheck.Location = new System.Drawing.Point(354, 68);
+            this.TorrentCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TorrentCheck.Name = "TorrentCheck";
+            this.TorrentCheck.Size = new System.Drawing.Size(139, 24);
+            this.TorrentCheck.TabIndex = 13;
+            this.TorrentCheck.Text = "Торрент файлы";
+            this.TorrentCheck.UseVisualStyleBackColor = true;
+            // 
+            // HtmlCheck
+            // 
+            this.HtmlCheck.AutoSize = true;
+            this.HtmlCheck.Location = new System.Drawing.Point(149, 68);
+            this.HtmlCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.HtmlCheck.Name = "HtmlCheck";
+            this.HtmlCheck.Size = new System.Drawing.Size(197, 24);
+            this.HtmlCheck.TabIndex = 12;
+            this.HtmlCheck.Text = "Cтраницы из интернета";
+            this.HtmlCheck.UseVisualStyleBackColor = true;
+            // 
+            // PsdCheck
+            // 
+            this.PsdCheck.AutoSize = true;
+            this.PsdCheck.Location = new System.Drawing.Point(9, 68);
+            this.PsdCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.PsdCheck.Name = "PsdCheck";
+            this.PsdCheck.Size = new System.Drawing.Size(134, 24);
+            this.PsdCheck.TabIndex = 11;
+            this.PsdCheck.Text = "Фотошоп (psd)";
+            this.PsdCheck.UseVisualStyleBackColor = true;
             // 
             // DocCheck
             // 
             this.DocCheck.AutoSize = true;
-            this.DocCheck.Location = new System.Drawing.Point(126, 4);
+            this.DocCheck.Location = new System.Drawing.Point(10, 36);
             this.DocCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DocCheck.Name = "DocCheck";
             this.DocCheck.Size = new System.Drawing.Size(109, 24);
@@ -233,7 +269,7 @@
             // AudioCheck
             // 
             this.AudioCheck.AutoSize = true;
-            this.AudioCheck.Location = new System.Drawing.Point(241, 4);
+            this.AudioCheck.Location = new System.Drawing.Point(132, 4);
             this.AudioCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AudioCheck.Name = "AudioCheck";
             this.AudioCheck.Size = new System.Drawing.Size(74, 24);
@@ -244,8 +280,7 @@
             // BrokerPhotosCheck
             // 
             this.BrokerPhotosCheck.AutoSize = true;
-            this.BrokerPhotosCheck.Enabled = false;
-            this.BrokerPhotosCheck.Location = new System.Drawing.Point(10, 35);
+            this.BrokerPhotosCheck.Location = new System.Drawing.Point(7, 100);
             this.BrokerPhotosCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BrokerPhotosCheck.Name = "BrokerPhotosCheck";
             this.BrokerPhotosCheck.Size = new System.Drawing.Size(163, 24);
@@ -257,7 +292,7 @@
             // TxtCheck
             // 
             this.TxtCheck.AutoSize = true;
-            this.TxtCheck.Location = new System.Drawing.Point(321, 4);
+            this.TxtCheck.Location = new System.Drawing.Point(212, 4);
             this.TxtCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtCheck.Name = "TxtCheck";
             this.TxtCheck.Size = new System.Drawing.Size(50, 24);
@@ -265,21 +300,21 @@
             this.TxtCheck.Text = "Txt";
             this.TxtCheck.UseVisualStyleBackColor = true;
             // 
-            // ZipCheck
+            // ZipFilesCheck
             // 
-            this.ZipCheck.AutoSize = true;
-            this.ZipCheck.Location = new System.Drawing.Point(463, 4);
-            this.ZipCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ZipCheck.Name = "ZipCheck";
-            this.ZipCheck.Size = new System.Drawing.Size(85, 24);
-            this.ZipCheck.TabIndex = 6;
-            this.ZipCheck.Text = "Архивы";
-            this.ZipCheck.UseVisualStyleBackColor = true;
+            this.ZipFilesCheck.AutoSize = true;
+            this.ZipFilesCheck.Location = new System.Drawing.Point(354, 4);
+            this.ZipFilesCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ZipFilesCheck.Name = "ZipFilesCheck";
+            this.ZipFilesCheck.Size = new System.Drawing.Size(85, 24);
+            this.ZipFilesCheck.TabIndex = 6;
+            this.ZipFilesCheck.Text = "Архивы";
+            this.ZipFilesCheck.UseVisualStyleBackColor = true;
             // 
             // VideoCheck
             // 
             this.VideoCheck.AutoSize = true;
-            this.VideoCheck.Location = new System.Drawing.Point(383, 4);
+            this.VideoCheck.Location = new System.Drawing.Point(274, 4);
             this.VideoCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.VideoCheck.Name = "VideoCheck";
             this.VideoCheck.Size = new System.Drawing.Size(74, 24);
@@ -291,7 +326,7 @@
             // 
             this.button_sort.Enabled = false;
             this.button_sort.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button_sort.Location = new System.Drawing.Point(312, 315);
+            this.button_sort.Location = new System.Drawing.Point(314, 361);
             this.button_sort.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_sort.Name = "button_sort";
             this.button_sort.Size = new System.Drawing.Size(157, 49);
@@ -302,7 +337,7 @@
             // 
             // button_result
             // 
-            this.button_result.Location = new System.Drawing.Point(514, 280);
+            this.button_result.Location = new System.Drawing.Point(516, 326);
             this.button_result.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_result.Name = "button_result";
             this.button_result.Size = new System.Drawing.Size(86, 31);
@@ -315,7 +350,7 @@
             // 
             this.button_scan.Enabled = false;
             this.button_scan.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button_scan.Location = new System.Drawing.Point(141, 315);
+            this.button_scan.Location = new System.Drawing.Point(143, 361);
             this.button_scan.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_scan.Name = "button_scan";
             this.button_scan.Size = new System.Drawing.Size(157, 49);
@@ -328,7 +363,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(98, 226);
+            this.label3.Location = new System.Drawing.Point(100, 272);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(433, 20);
             this.label3.TabIndex = 4;
@@ -336,6 +371,7 @@
             // 
             // panel_buttonFiles
             // 
+            this.panel_buttonFiles.Controls.Add(this.AllCheck);
             this.panel_buttonFiles.Controls.Add(this.MyCheck);
             this.panel_buttonFiles.Controls.Add(this.MyBox);
             this.panel_buttonFiles.Controls.Add(this.label4);
@@ -343,13 +379,25 @@
             this.panel_buttonFiles.Location = new System.Drawing.Point(14, 79);
             this.panel_buttonFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel_buttonFiles.Name = "panel_buttonFiles";
-            this.panel_buttonFiles.Size = new System.Drawing.Size(590, 143);
+            this.panel_buttonFiles.Size = new System.Drawing.Size(590, 189);
             this.panel_buttonFiles.TabIndex = 5;
+            // 
+            // AllCheck
+            // 
+            this.AllCheck.AutoSize = true;
+            this.AllCheck.Location = new System.Drawing.Point(50, 148);
+            this.AllCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.AllCheck.Name = "AllCheck";
+            this.AllCheck.Size = new System.Drawing.Size(147, 24);
+            this.AllCheck.TabIndex = 17;
+            this.AllCheck.Text = "Все расширения";
+            this.AllCheck.UseVisualStyleBackColor = true;
+            this.AllCheck.CheckedChanged += new System.EventHandler(this.AllCheck_CheckedChanged);
             // 
             // MyCheck
             // 
             this.MyCheck.AutoSize = true;
-            this.MyCheck.Location = new System.Drawing.Point(363, 104);
+            this.MyCheck.Location = new System.Drawing.Point(358, 164);
             this.MyCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MyCheck.Name = "MyCheck";
             this.MyCheck.Size = new System.Drawing.Size(18, 17);
@@ -360,8 +408,9 @@
             // MyBox
             // 
             this.MyBox.Enabled = false;
-            this.MyBox.Location = new System.Drawing.Point(243, 99);
+            this.MyBox.Location = new System.Drawing.Point(238, 159);
             this.MyBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MyBox.MaxLength = 20;
             this.MyBox.Name = "MyBox";
             this.MyBox.PlaceholderText = "    Пример: jar";
             this.MyBox.Size = new System.Drawing.Size(114, 27);
@@ -370,7 +419,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(219, 75);
+            this.label4.Location = new System.Drawing.Point(214, 135);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(179, 20);
             this.label4.TabIndex = 8;
@@ -378,7 +427,7 @@
             // 
             // wayBox_result
             // 
-            this.wayBox_result.Location = new System.Drawing.Point(20, 280);
+            this.wayBox_result.Location = new System.Drawing.Point(22, 326);
             this.wayBox_result.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.wayBox_result.Name = "wayBox_result";
             this.wayBox_result.ReadOnly = true;
@@ -393,7 +442,7 @@
             this.panel2.Location = new System.Drawing.Point(14, 4);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(593, 79);
+            this.panel2.Size = new System.Drawing.Size(593, 71);
             this.panel2.TabIndex = 4;
             // 
             // label2
@@ -444,7 +493,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(624, 768);
+            this.ClientSize = new System.Drawing.Size(624, 814);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.OutDataListBox);
             this.Controls.Add(this.panel_all);
@@ -490,7 +539,7 @@
         private TextBox MyBox;
         private Label label4;
         private CheckBox BrokerPhotosCheck;
-        private CheckBox ZipCheck;
+        private CheckBox ZipFilesCheck;
         private CheckBox VideoCheck;
         private CheckBox TxtCheck;
         private CheckBox AudioCheck;
@@ -503,10 +552,14 @@
         private TextBox wayBox;
         private CheckBox MyCheck;
         private Panel panel_ButtonExceptMy;
-        private CheckBox BrokerVideoCheck;
-        private CheckBox BrokerAudioCheck;
-        private CheckBox checkActBroker;
         private PictureBox pictureBox1;
         private Label label5;
+        private CheckBox PsdCheck;
+        private CheckBox HtmlCheck;
+        private CheckBox TorrentCheck;
+        private CheckBox TableCheck;
+        private CheckBox PresentCheck;
+        private CheckBox PdfCheck;
+        private CheckBox AllCheck;
     }
 }
