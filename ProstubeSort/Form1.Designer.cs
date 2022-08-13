@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.label1 = new System.Windows.Forms.Label();
+            this.heading = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.advanced_settings = new System.Windows.Forms.ToolStripMenuItem();
+            this.языкToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.OutDataListBox = new System.Windows.Forms.ListBox();
             this.panel_all = new System.Windows.Forms.Panel();
@@ -47,7 +49,7 @@
             this.DocCheck = new System.Windows.Forms.CheckBox();
             this.PhotosCheck = new System.Windows.Forms.CheckBox();
             this.AudioCheck = new System.Windows.Forms.CheckBox();
-            this.BrokerPhotosCheck = new System.Windows.Forms.CheckBox();
+            this.BrokenPhotosCheck = new System.Windows.Forms.CheckBox();
             this.TxtCheck = new System.Windows.Forms.CheckBox();
             this.ZipFilesCheck = new System.Windows.Forms.CheckBox();
             this.VideoCheck = new System.Windows.Forms.CheckBox();
@@ -66,6 +68,25 @@
             this.button_review = new System.Windows.Forms.Button();
             this.wayBox = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel_setting = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.textFolderBrokenPhotos = new System.Windows.Forms.TextBox();
+            this.textFolderSpreadsheets = new System.Windows.Forms.TextBox();
+            this.textFolderPresentations = new System.Windows.Forms.TextBox();
+            this.textFolderTorrent = new System.Windows.Forms.TextBox();
+            this.textFolderHtml = new System.Windows.Forms.TextBox();
+            this.textFolderZipFiles = new System.Windows.Forms.TextBox();
+            this.textFolderTxt = new System.Windows.Forms.TextBox();
+            this.textFolderPsd = new System.Windows.Forms.TextBox();
+            this.textFolder_pdf = new System.Windows.Forms.TextBox();
+            this.textFolder_Video = new System.Windows.Forms.TextBox();
+            this.textFolder_Doc = new System.Windows.Forms.TextBox();
+            this.textFolder_audio = new System.Windows.Forms.TextBox();
+            this.textFolder_photos = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.notificC_Check = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel_all.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -73,23 +94,33 @@
             this.panel_buttonFiles.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel_setting.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // heading
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(107, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(410, 32);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Заполните данные для сортировки";
+            this.heading.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.heading.AutoSize = true;
+            this.heading.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.heading.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.heading.Location = new System.Drawing.Point(107, 30);
+            this.heading.Name = "heading";
+            this.heading.Size = new System.Drawing.Size(410, 32);
+            this.heading.TabIndex = 2;
+            this.heading.Text = "Заполните данные для сортировки";
+            this.heading.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gitHubToolStripMenuItem});
+            this.mainToolStripMenuItem,
+            this.advanced_settings,
+            this.языкToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
@@ -98,11 +129,25 @@
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // gitHubToolStripMenuItem
+            // mainToolStripMenuItem
             // 
-            this.gitHubToolStripMenuItem.Name = "gitHubToolStripMenuItem";
-            this.gitHubToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
-            this.gitHubToolStripMenuItem.Text = "GitHub";
+            this.mainToolStripMenuItem.Name = "mainToolStripMenuItem";
+            this.mainToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
+            this.mainToolStripMenuItem.Text = "Главная";
+            this.mainToolStripMenuItem.Click += new System.EventHandler(this.mainToolStripMenuItem_Click);
+            // 
+            // advanced_settings
+            // 
+            this.advanced_settings.Name = "advanced_settings";
+            this.advanced_settings.Size = new System.Drawing.Size(198, 24);
+            this.advanced_settings.Text = "Расширенные настройки";
+            this.advanced_settings.Click += new System.EventHandler(this.advanced_settings_Click);
+            // 
+            // языкToolStripMenuItem
+            // 
+            this.языкToolStripMenuItem.Name = "языкToolStripMenuItem";
+            this.языкToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
+            this.языкToolStripMenuItem.Text = "Язык";
             // 
             // folderBrowserDialog1
             // 
@@ -144,7 +189,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 4);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(610, 424);
+            this.panel1.Size = new System.Drawing.Size(618, 424);
             this.panel1.TabIndex = 4;
             // 
             // label5
@@ -167,7 +212,7 @@
             this.panel_ButtonExceptMy.Controls.Add(this.DocCheck);
             this.panel_ButtonExceptMy.Controls.Add(this.PhotosCheck);
             this.panel_ButtonExceptMy.Controls.Add(this.AudioCheck);
-            this.panel_ButtonExceptMy.Controls.Add(this.BrokerPhotosCheck);
+            this.panel_ButtonExceptMy.Controls.Add(this.BrokenPhotosCheck);
             this.panel_ButtonExceptMy.Controls.Add(this.TxtCheck);
             this.panel_ButtonExceptMy.Controls.Add(this.ZipFilesCheck);
             this.panel_ButtonExceptMy.Controls.Add(this.VideoCheck);
@@ -277,17 +322,17 @@
             this.AudioCheck.Text = "Аудио";
             this.AudioCheck.UseVisualStyleBackColor = true;
             // 
-            // BrokerPhotosCheck
+            // BrokenPhotosCheck
             // 
-            this.BrokerPhotosCheck.AutoSize = true;
-            this.BrokerPhotosCheck.Location = new System.Drawing.Point(7, 100);
-            this.BrokerPhotosCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.BrokerPhotosCheck.Name = "BrokerPhotosCheck";
-            this.BrokerPhotosCheck.Size = new System.Drawing.Size(163, 24);
-            this.BrokerPhotosCheck.TabIndex = 7;
-            this.BrokerPhotosCheck.Text = "Битые фотографии";
-            this.BrokerPhotosCheck.UseVisualStyleBackColor = true;
-            this.BrokerPhotosCheck.CheckedChanged += new System.EventHandler(this.BrokerPhotosCheck_CheckedChanged);
+            this.BrokenPhotosCheck.AutoSize = true;
+            this.BrokenPhotosCheck.Location = new System.Drawing.Point(7, 100);
+            this.BrokenPhotosCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.BrokenPhotosCheck.Name = "BrokenPhotosCheck";
+            this.BrokenPhotosCheck.Size = new System.Drawing.Size(163, 24);
+            this.BrokenPhotosCheck.TabIndex = 7;
+            this.BrokenPhotosCheck.Text = "Битые фотографии";
+            this.BrokenPhotosCheck.UseVisualStyleBackColor = true;
+            this.BrokenPhotosCheck.CheckedChanged += new System.EventHandler(this.BrokerPhotosCheck_CheckedChanged);
             // 
             // TxtCheck
             // 
@@ -385,12 +430,12 @@
             // AllCheck
             // 
             this.AllCheck.AutoSize = true;
-            this.AllCheck.Location = new System.Drawing.Point(50, 148);
+            this.AllCheck.Location = new System.Drawing.Point(7, 148);
             this.AllCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AllCheck.Name = "AllCheck";
-            this.AllCheck.Size = new System.Drawing.Size(147, 24);
+            this.AllCheck.Size = new System.Drawing.Size(210, 24);
             this.AllCheck.TabIndex = 17;
-            this.AllCheck.Text = "Все расширения";
+            this.AllCheck.Text = "Выбрать все расширения";
             this.AllCheck.UseVisualStyleBackColor = true;
             this.AllCheck.CheckedChanged += new System.EventHandler(this.AllCheck_CheckedChanged);
             // 
@@ -474,7 +519,6 @@
             this.wayBox.ReadOnly = true;
             this.wayBox.Size = new System.Drawing.Size(487, 27);
             this.wayBox.TabIndex = 1;
-            this.wayBox.TextChanged += new System.EventHandler(this.wayBox_TextChanged);
             // 
             // pictureBox1
             // 
@@ -487,6 +531,204 @@
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
+            // panel_setting
+            // 
+            this.panel_setting.Controls.Add(this.panel4);
+            this.panel_setting.Controls.Add(this.panel3);
+            this.panel_setting.Controls.Add(this.label1);
+            this.panel_setting.Location = new System.Drawing.Point(6, 33);
+            this.panel_setting.Name = "panel_setting";
+            this.panel_setting.Size = new System.Drawing.Size(615, 779);
+            this.panel_setting.TabIndex = 13;
+            this.panel_setting.Visible = false;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.textFolderBrokenPhotos);
+            this.panel4.Controls.Add(this.textFolderSpreadsheets);
+            this.panel4.Controls.Add(this.textFolderPresentations);
+            this.panel4.Controls.Add(this.textFolderTorrent);
+            this.panel4.Controls.Add(this.textFolderHtml);
+            this.panel4.Controls.Add(this.textFolderZipFiles);
+            this.panel4.Controls.Add(this.textFolderTxt);
+            this.panel4.Controls.Add(this.textFolderPsd);
+            this.panel4.Controls.Add(this.textFolder_pdf);
+            this.panel4.Controls.Add(this.textFolder_Video);
+            this.panel4.Controls.Add(this.textFolder_Doc);
+            this.panel4.Controls.Add(this.textFolder_audio);
+            this.panel4.Controls.Add(this.textFolder_photos);
+            this.panel4.Controls.Add(this.label6);
+            this.panel4.Location = new System.Drawing.Point(3, 93);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(607, 187);
+            this.panel4.TabIndex = 5;
+            // 
+            // textFolderBrokenPhotos
+            // 
+            this.textFolderBrokenPhotos.Location = new System.Drawing.Point(187, 152);
+            this.textFolderBrokenPhotos.Name = "textFolderBrokenPhotos";
+            this.textFolderBrokenPhotos.Size = new System.Drawing.Size(221, 27);
+            this.textFolderBrokenPhotos.TabIndex = 13;
+            this.textFolderBrokenPhotos.Text = "Broken Photos";
+            this.textFolderBrokenPhotos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textFolderSpreadsheets
+            // 
+            this.textFolderSpreadsheets.Location = new System.Drawing.Point(461, 108);
+            this.textFolderSpreadsheets.Name = "textFolderSpreadsheets";
+            this.textFolderSpreadsheets.Size = new System.Drawing.Size(140, 27);
+            this.textFolderSpreadsheets.TabIndex = 12;
+            this.textFolderSpreadsheets.Text = "Spreadsheets";
+            this.textFolderSpreadsheets.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textFolderPresentations
+            // 
+            this.textFolderPresentations.Location = new System.Drawing.Point(310, 108);
+            this.textFolderPresentations.Name = "textFolderPresentations";
+            this.textFolderPresentations.Size = new System.Drawing.Size(140, 27);
+            this.textFolderPresentations.TabIndex = 11;
+            this.textFolderPresentations.Text = "Presentations";
+            this.textFolderPresentations.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textFolderTorrent
+            // 
+            this.textFolderTorrent.Location = new System.Drawing.Point(160, 108);
+            this.textFolderTorrent.Name = "textFolderTorrent";
+            this.textFolderTorrent.Size = new System.Drawing.Size(140, 27);
+            this.textFolderTorrent.TabIndex = 10;
+            this.textFolderTorrent.Text = "Torrent";
+            this.textFolderTorrent.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textFolderHtml
+            // 
+            this.textFolderHtml.Location = new System.Drawing.Point(7, 108);
+            this.textFolderHtml.Name = "textFolderHtml";
+            this.textFolderHtml.Size = new System.Drawing.Size(140, 27);
+            this.textFolderHtml.TabIndex = 9;
+            this.textFolderHtml.Text = "Html";
+            this.textFolderHtml.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textFolderZipFiles
+            // 
+            this.textFolderZipFiles.Location = new System.Drawing.Point(461, 75);
+            this.textFolderZipFiles.Name = "textFolderZipFiles";
+            this.textFolderZipFiles.Size = new System.Drawing.Size(140, 27);
+            this.textFolderZipFiles.TabIndex = 8;
+            this.textFolderZipFiles.Text = "Archives";
+            this.textFolderZipFiles.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textFolderTxt
+            // 
+            this.textFolderTxt.Location = new System.Drawing.Point(461, 42);
+            this.textFolderTxt.Name = "textFolderTxt";
+            this.textFolderTxt.Size = new System.Drawing.Size(140, 27);
+            this.textFolderTxt.TabIndex = 7;
+            this.textFolderTxt.Text = "Txt";
+            this.textFolderTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textFolderPsd
+            // 
+            this.textFolderPsd.Location = new System.Drawing.Point(310, 42);
+            this.textFolderPsd.Name = "textFolderPsd";
+            this.textFolderPsd.Size = new System.Drawing.Size(140, 27);
+            this.textFolderPsd.TabIndex = 6;
+            this.textFolderPsd.Text = "Psd-photoshop";
+            this.textFolderPsd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textFolder_pdf
+            // 
+            this.textFolder_pdf.Location = new System.Drawing.Point(310, 75);
+            this.textFolder_pdf.Name = "textFolder_pdf";
+            this.textFolder_pdf.Size = new System.Drawing.Size(140, 27);
+            this.textFolder_pdf.TabIndex = 5;
+            this.textFolder_pdf.Text = "Pdf-Document";
+            this.textFolder_pdf.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textFolder_Video
+            // 
+            this.textFolder_Video.Location = new System.Drawing.Point(160, 75);
+            this.textFolder_Video.Name = "textFolder_Video";
+            this.textFolder_Video.Size = new System.Drawing.Size(140, 27);
+            this.textFolder_Video.TabIndex = 4;
+            this.textFolder_Video.Text = "Video";
+            this.textFolder_Video.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textFolder_Doc
+            // 
+            this.textFolder_Doc.Location = new System.Drawing.Point(160, 42);
+            this.textFolder_Doc.Name = "textFolder_Doc";
+            this.textFolder_Doc.Size = new System.Drawing.Size(140, 27);
+            this.textFolder_Doc.TabIndex = 3;
+            this.textFolder_Doc.Text = "Documents";
+            this.textFolder_Doc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textFolder_audio
+            // 
+            this.textFolder_audio.Location = new System.Drawing.Point(7, 75);
+            this.textFolder_audio.Name = "textFolder_audio";
+            this.textFolder_audio.Size = new System.Drawing.Size(140, 27);
+            this.textFolder_audio.TabIndex = 2;
+            this.textFolder_audio.Text = "Audio";
+            this.textFolder_audio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textFolder_photos
+            // 
+            this.textFolder_photos.Location = new System.Drawing.Point(7, 42);
+            this.textFolder_photos.Name = "textFolder_photos";
+            this.textFolder_photos.Size = new System.Drawing.Size(140, 27);
+            this.textFolder_photos.TabIndex = 1;
+            this.textFolder_photos.Text = "Photos";
+            this.textFolder_photos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(235, 5);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(152, 25);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Названия папок";
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.notificC_Check);
+            this.panel3.Location = new System.Drawing.Point(3, 42);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(607, 44);
+            this.panel3.TabIndex = 4;
+            // 
+            // notificC_Check
+            // 
+            this.notificC_Check.AutoSize = true;
+            this.notificC_Check.Checked = true;
+            this.notificC_Check.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.notificC_Check.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.notificC_Check.Location = new System.Drawing.Point(98, 4);
+            this.notificC_Check.Name = "notificC_Check";
+            this.notificC_Check.Size = new System.Drawing.Size(431, 32);
+            this.notificC_Check.TabIndex = 0;
+            this.notificC_Check.Tag = "1";
+            this.notificC_Check.Text = "Предупреждать об использовании диска C";
+            this.notificC_Check.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label1.Location = new System.Drawing.Point(164, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(295, 32);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Расширенные настройки";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -495,10 +737,11 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(624, 814);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.panel_setting);
             this.Controls.Add(this.OutDataListBox);
             this.Controls.Add(this.panel_all);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.heading);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -518,15 +761,21 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel_setting.ResumeLayout(false);
+            this.panel_setting.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private Label label1;
+        private Label heading;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem gitHubToolStripMenuItem;
+        private ToolStripMenuItem mainToolStripMenuItem;
         private FolderBrowserDialog folderBrowserDialog1;
         private ListBox OutDataListBox;
         private Panel panel_all;
@@ -538,7 +787,7 @@
         private Panel panel_buttonFiles;
         private TextBox MyBox;
         private Label label4;
-        private CheckBox BrokerPhotosCheck;
+        private CheckBox BrokenPhotosCheck;
         private CheckBox ZipFilesCheck;
         private CheckBox VideoCheck;
         private CheckBox TxtCheck;
@@ -561,5 +810,26 @@
         private CheckBox PresentCheck;
         private CheckBox PdfCheck;
         private CheckBox AllCheck;
+        private ToolStripMenuItem языкToolStripMenuItem;
+        private ToolStripMenuItem advanced_settings;
+        private Panel panel_setting;
+        private Label label1;
+        private Panel panel3;
+        private CheckBox notificC_Check;
+        private Panel panel4;
+        private Label label6;
+        private TextBox textFolder_photos;
+        private TextBox textFolder_audio;
+        private TextBox textFolder_Doc;
+        private TextBox textFolder_Video;
+        private TextBox textFolder_pdf;
+        private TextBox textFolderPsd;
+        private TextBox textFolderTxt;
+        private TextBox textFolderZipFiles;
+        private TextBox textFolderHtml;
+        private TextBox textFolderTorrent;
+        private TextBox textFolderPresentations;
+        private TextBox textFolderSpreadsheets;
+        private TextBox textFolderBrokenPhotos;
     }
 }

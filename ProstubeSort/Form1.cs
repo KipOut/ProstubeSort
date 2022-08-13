@@ -40,7 +40,10 @@ namespace ProstubeSort
                 button_sort.Enabled = true;
                 if (wayBox.Text.StartsWith("C"))
                 {
-                    WarningC();
+                    if (notificC_Check.Checked == true)
+                    {
+                        WarningC();
+                    }
                 }
             }
         }
@@ -52,152 +55,113 @@ namespace ProstubeSort
                 wayBox_result.Text = folderBrowserDialog1.SelectedPath;
                 if (wayBox_result.Text.StartsWith("C"))
                 {
-                    WarningC();
+                    if (notificC_Check.Checked == true)
+                    {
+                        WarningC();
+                    }
                 }
             }
         }
         #endregion
 
-        #region Сканирование
+        #region Функция сканирования
+        void ScanF(CheckBox nameCheck, string[] extensionsFiles, string nameItems)
+        {
+            if (nameCheck.Checked)
+            {
+                OutDataListBox.Items.Add($"{nameItems}:");
+                foreach (string expansionPhotos in extensionsFiles)
+                {
+                    foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionPhotos, SearchOption.AllDirectories))
+                    {
+                        OutDataListBox.Items.Add(file);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Функция сортировки
+        void SortF(string nameFolder, CheckBox nameCheck, string[] extensionsFiles, string nameItems)
+        {
+            if (nameCheck.Checked)
+            {
+                Directory.CreateDirectory($@"{wayBox_result.Text}\{nameFolder}");
+                OutDataListBox.Items.Add($"{nameItems}");
+                foreach (string expansionPhotos in extensionsFiles)
+                {
+                    foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionPhotos, SearchOption.AllDirectories))
+                    {
+                        try
+                        {
+                            string result = Path.GetFileName(file);
+                            File.Move(file, $@"{wayBox_result.Text}\{nameFolder}\{result}");
+                            OutDataListBox.Items.Add($"Успешно: {file}");
+                        }
+                        catch
+                        {
+                            OutDataListBox.Items.Add($"Ошибка: {file}");
+                            string result = Path.GetFileName(file);
+                            SystemSounds.Hand.Play();
+                            DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning,
+                                MessageBoxDefaultButton.Button1);
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Кнопка сканирование
         private void button_scan_Click(object sender, EventArgs e)
         {
             OutDataListBox.Items.Clear();
             if (wayBox.Text.Length != 0)
             {
-                #region Фотографии
-                if (PhotosCheck.Checked)
-                {
-                    
-                    string[] photos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
-                    foreach (string expansionPhotos in photos)
-                    {
-                        OutDataListBox.Items.Add("Фотографии:");
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionPhotos, SearchOption.AllDirectories))
-                        {
-                            OutDataListBox.Items.Add(file);
-                        }
-                    }
-                }
-                #endregion
+                string[] photos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
+                ScanF(PhotosCheck, photos, "Фотографии");
 
-                #region Документы
-                if (DocCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Документы:");
-                    string[] doc = { "*.doc", "*.docx", "*.odt" };
-                    foreach (string expansionDoc in doc)
-                    {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionDoc, SearchOption.AllDirectories))
-                        {
-                            OutDataListBox.Items.Add(file);
-                        }
-                    }
-                }
-                #endregion
+                string[] doc = { "*.doc", "*.docx", "*.odt" };
+                ScanF(DocCheck, doc, "Документы");
 
-                #region Электронные таблицы
-                if (TableCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Электронные таблицы:");
-                    string[] table = { "*.xlsx", "*.xls" };
-                    foreach (string expansionTable in table)
-                    {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionTable, SearchOption.AllDirectories))
-                        {
-                            OutDataListBox.Items.Add(file);
-                        }
-                    }
-                }
-                #endregion
+                string[] table = { "*.xlsx", "*.xls" };
+                ScanF(TableCheck, table, "Электронные таблицы");
 
-                #region Pdf документы
-                if (PdfCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Pdf документы:");
-                    foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", "*.pdf", SearchOption.AllDirectories))
-                    {
-                        OutDataListBox.Items.Add(file);
-                    }
-                }
-                #endregion
+                string[] pdf = { "*.pdf" };
+                ScanF(PdfCheck, pdf, "Pdf документы");
 
-                #region Презентации
-                if (PresentCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Презентации:");
-                    string[] present = { "*.ppt", "*.pptx", "*.odp" };
-                    foreach (string expansionPresent in present)
-                    {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionPresent, SearchOption.AllDirectories))
-                        {
-                            OutDataListBox.Items.Add(file);
-                        }
-                    }
-                }
-                #endregion
+                string[] present = { "*.ppt", "*.pptx", "*.odp" };
+                ScanF(PresentCheck, present, "Презентации");
 
-                #region Аудио
-                if (AudioCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Аудио:");
-                    string[] BrokerAudio = { "*.mp3", "*.wav", "*.midi", "*.aac" };
-                    foreach (string expansionMusic in BrokerAudio)
-                    {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionMusic, SearchOption.AllDirectories))
-                        {
-                            OutDataListBox.Items.Add(file);
-                        }
-                    }
-                }
-                #endregion
+                string[] audio = { "*.mp3", "*.wav", "*.midi", "*.aac" };
+                ScanF(AudioCheck, audio, "Аудио");
 
-                #region TXT
-                if (TxtCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Txt:");
-                    foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", "*.txt", SearchOption.AllDirectories))
-                    {
-                        OutDataListBox.Items.Add(file);
-                    }
-                }
-                #endregion
+                string[] txt = { "*.txt" };
+                ScanF(TxtCheck, txt, "Txt");
 
-                #region Видео
-                if (VideoCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Видео:");
-                    string[] video = { "*.mp4", "*.avi", "*.mkv", "*.wmv", "*.mkv", "*.flv", "mpeg" };
-                    foreach (string expansionVideo in video)
-                    {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionVideo, SearchOption.AllDirectories))
-                        {
-                            OutDataListBox.Items.Add(file);
-                        }
-                    }
-                }
-                #endregion
+                string[] video = { "*.mp4", "*.avi", "*.mkv", "*.wmv", "*.mkv", "*.flv", "mpeg" };
+                ScanF(VideoCheck, video, "Видео");
 
-                #region Архивы
-                if (ZipFilesCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Архивы:");
-                    string[] zipFiles = { "*.zip", "*.rar", "*.7z", "*.gzip" };
-                    foreach (string expansionZipFiles in zipFiles)
-                    {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionZipFiles, SearchOption.AllDirectories))
-                        {
-                            OutDataListBox.Items.Add(file);
-                        }
-                    }
-                }
-                #endregion
+                string[] zipFiles = { "*.zip", "*.rar", "*.7z", "*.gzip" };
+                ScanF(ZipFilesCheck, zipFiles, "Архивы");
+
+                string[] psd = { "*.psd" };
+                ScanF(PsdCheck, psd, "Фотошоп(psd)");
+
+                string[] html = { "*.html", "*.htm", "*.mht" };
+                ScanF(HtmlCheck, html, "Страницы из интернета");
+
+                string[] torrent = { "*.torrent" };
+                ScanF(TorrentCheck, torrent, "Торрент файлы");
 
                 #region Битые фотографии
-                if (BrokerPhotosCheck.Checked)
+                if (BrokenPhotosCheck.Checked)
                 {
                     OutDataListBox.Items.Add("Битые фотографии:");
-                    string[] BrokerPhotos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
-                    foreach (string typePhoto in BrokerPhotos)
+                    string[] BrokenPhotos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
+                    foreach (string typePhoto in BrokenPhotos)
                     {
                         foreach (string file in Directory.EnumerateFiles(folderBrowserDialog1.SelectedPath, typePhoto, SearchOption.AllDirectories))
                         {
@@ -216,16 +180,8 @@ namespace ProstubeSort
                 }
                 #endregion
 
-                #region Свое расширение
-                if (MyCheck.Checked)
-                {
-                    OutDataListBox.Items.Add($"{MyBox.Text}:");
-                    foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", $"*.{MyBox.Text}", SearchOption.AllDirectories))
-                    {
-                        OutDataListBox.Items.Add(file);
-                    }
-                }
-                #endregion
+                string[] myExt = { $"*.{MyBox.Text}" };
+                ScanF(MyCheck, myExt, MyBox.Text);
 
                 if (OutDataListBox.Items.Count == 0)
                 {
@@ -244,439 +200,113 @@ namespace ProstubeSort
         }
         #endregion
 
-        #region Сортировка
+        #region Кнопка сортировка
         private void button_sort_Click(object sender, EventArgs e)
         {
             OutDataListBox.Items.Clear();
             if (wayBox.Text.Length != 0 && wayBox_result.Text.Length != 0)
             {
-                #region Фотографии
-                if (PhotosCheck.Checked)
+                string[] namesFolder = { textFolderBrokenPhotos.Text, textFolderHtml.Text, textFolderPresentations.Text,
+                textFolderPsd.Text, textFolderSpreadsheets.Text, textFolderTorrent.Text, textFolderTxt.Text, textFolderZipFiles.Text,
+                textFolder_audio.Text, textFolder_Doc.Text, textFolder_pdf.Text, textFolder_photos.Text, textFolder_Video.Text};
+                foreach (string i in namesFolder)
                 {
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\Photos");
-                    OutDataListBox.Items.Add("Фотографии:");
-                    string[] photos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
-                    foreach (string expansionPhotos in photos)
+                    if (i.Length > 0)
                     {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionPhotos, SearchOption.AllDirectories))
-                        {
-                            try
-                            {
-                                string result = Path.GetFileName(file);
-                                File.Move(file, $@"{wayBox_result.Text}\Photos\{result}");
-                                OutDataListBox.Items.Add($"Успешно: {file}");
-                            }
-                            catch
-                            {
-                                OutDataListBox.Items.Add($"Ошибка: {file}");
-                                string result = Path.GetFileName(file);
-                                SystemSounds.Hand.Play();
-                                DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning,
-                                    MessageBoxDefaultButton.Button1);
-                            }
-                        }
-                    }
-                }
-                #endregion
+                        string[] photos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
+                        SortF(textFolder_photos.Text, PhotosCheck, photos, "Фотографии");
 
-                #region Документы
-                if (DocCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Документы:");
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\Documents");
-                    string[] doc = { "*.doc", "*.docx", "*.odt" };
-                    foreach (string expansionDoc in doc)
-                    {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionDoc, SearchOption.AllDirectories))
-                        {
-                            try
-                            {
-                                string result = Path.GetFileName(file);
-                                File.Move(file, $@"{wayBox_result.Text}\Documents\{result}");
-                                OutDataListBox.Items.Add($"Успешно: {file}");
-                            }
-                            catch
-                            {
-                                OutDataListBox.Items.Add($"Ошибка: {file}");
-                                string result = Path.GetFileName(file);
-                                SystemSounds.Hand.Play();
-                                DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning,
-                                    MessageBoxDefaultButton.Button1);
-                            }
-                        }
-                    }
-                }
-                #endregion
+                        string[] doc = { "*.doc", "*.docx", "*.odt" };
+                        SortF(textFolder_Doc.Text, DocCheck, doc, "Документы");
 
-                #region Электронные таблицы
-                if (TableCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Электронные таблицы:");
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\Spreadsheets");
-                    string[] table = { "*.xlsx", "*.xls" };
-                    foreach (string expansionTable in table)
-                    {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionTable, SearchOption.AllDirectories))
-                        {
-                            try
-                            {
-                                string result = Path.GetFileName(file);
-                                File.Move(file, $@"{wayBox_result.Text}\Spreadsheets\{result}");
-                                OutDataListBox.Items.Add($"Успешно: {file}");
-                            }
-                            catch
-                            {
-                                OutDataListBox.Items.Add($"Ошибка: {file}");
-                                string result = Path.GetFileName(file);
-                                SystemSounds.Hand.Play();
-                                DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning,
-                                    MessageBoxDefaultButton.Button1);
-                            }
-                        }
-                    }
-                }
-                #endregion
+                        string[] table = { "*.xlsx", "*.xls" };
+                        SortF(textFolderSpreadsheets.Text, TableCheck, table, "Электронные таблицы");
 
-                #region Pdf документы
-                if (PdfCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Pdf документы:");
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\Pdf-Document");
-                    foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", "*.pdf", SearchOption.AllDirectories))
-                    {
-                        try
-                        {
-                            string result = Path.GetFileName(file);
-                            File.Move(file, $@"{wayBox_result.Text}\Pdf-Document\{result}");
-                            OutDataListBox.Items.Add($"Успешно: {file}");
-                        }
-                        catch
-                        {
-                            OutDataListBox.Items.Add($"Ошибка: {file}");
-                            string result = Path.GetFileName(file);
-                            SystemSounds.Hand.Play();
-                            DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning,
-                                MessageBoxDefaultButton.Button1);
-                        }
-                    }
-                }
-                #endregion
+                        string[] pdf = { "*.pdf" };
+                        SortF(textFolder_pdf.Text, PdfCheck, pdf, "Pdf документы");
 
-                #region Презентации
-                if (PresentCheck.Checked)
-                {
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\Presentations");
-                    OutDataListBox.Items.Add("Презентации:");
-                    string[] present = { "*.ppt", "*.pptx", "*.odp" };
-                    foreach (string expansionPresent in present)
-                    {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionPresent, SearchOption.AllDirectories))
-                        {
-                            try
-                            {
-                                string result = Path.GetFileName(file);
-                                File.Move(file, $@"{wayBox_result.Text}\Presentations\{result}");
-                                OutDataListBox.Items.Add($"Успешно: {file}");
-                            }
-                            catch
-                            {
-                                OutDataListBox.Items.Add($"Ошибка: {file}");
-                                string result = Path.GetFileName(file);
-                                SystemSounds.Hand.Play();
-                                DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning,
-                                    MessageBoxDefaultButton.Button1);
-                            }
-                        }
-                    }
-                }
-                #endregion
+                        string[] present = { "*.ppt", "*.pptx", "*.odp" };
+                        SortF(textFolderPresentations.Text, PresentCheck, present, "Презентации");
 
-                #region Аудио
-                if (AudioCheck.Checked)
-                {
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\Audio");
-                    OutDataListBox.Items.Add("Аудио:");
-                    string[] audio = { "*.mp3", "*.wav", "*.midi", "*.aac" };
-                    foreach (string expansionAudio in audio)
-                    {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionAudio, SearchOption.AllDirectories))
-                        {
-                            try
-                            {
-                                string result = Path.GetFileName(file);
-                                File.Move(file, $@"{wayBox_result.Text}\Audio\{result}");
-                                OutDataListBox.Items.Add($"Успешно: {file}");
-                            }
-                            catch
-                            {
-                                OutDataListBox.Items.Add($"Ошибка: {file}");
-                                string result = Path.GetFileName(file);
-                                SystemSounds.Hand.Play();
-                                DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning,
-                                    MessageBoxDefaultButton.Button1);
-                            }
-                        }
-                    }
-                }
-                #endregion
+                        string[] audio = { "*.mp3", "*.wav", "*.midi", "*.aac" };
+                        SortF(textFolder_audio.Text, AudioCheck, audio, "Аудио");
 
-                #region TXT
-                if (TxtCheck.Checked)
-                {
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\Txt");
-                    OutDataListBox.Items.Add("Txt:");
-                    foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", "*.txt", SearchOption.AllDirectories))
-                    {
-                        try
-                        {
-                            string result = Path.GetFileName(file);
-                            File.Move(file, $@"{wayBox_result.Text}\Txt\{result}");
-                            OutDataListBox.Items.Add($"Успешно: {file}");
-                        }
-                        catch
-                        {
-                            OutDataListBox.Items.Add($"Ошибка: {file}");
-                            string result = Path.GetFileName(file);
-                            SystemSounds.Hand.Play();
-                            DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning,
-                                MessageBoxDefaultButton.Button1);
-                        }
-                    }
-                }
-                #endregion
+                        string[] txt = { "*.txt" };
+                        SortF(textFolderTxt.Text, TxtCheck, txt, "Txt");
 
-                #region Видео
-                if (VideoCheck.Checked)
-                {
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\Video");
-                    OutDataListBox.Items.Add("Видео:");
-                    string[] video = { "*.mp4", "*.avi", "*.mkv", "*.wmv", "*.mkv", "*.flv", "mpeg" };
-                    foreach (string expansionVideo in video)
-                    {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionVideo, SearchOption.AllDirectories))
-                        {
-                            try
-                            {
-                                string result = Path.GetFileName(file);
-                                File.Move(file, $@"{wayBox_result.Text}\Video\{result}");
-                                OutDataListBox.Items.Add($"Успешно: {file}");
-                            }
-                            catch
-                            {
-                                OutDataListBox.Items.Add($"Ошибка: {file}");
-                                string result = Path.GetFileName(file);
-                                SystemSounds.Hand.Play();
-                                DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning,
-                                    MessageBoxDefaultButton.Button1);
-                            }
-                        }
-                    }
-                }
-                #endregion
+                        string[] video = { "*.mp4", "*.avi", "*.mkv", "*.wmv", "*.mkv", "*.flv", "mpeg" };
+                        SortF(textFolder_Video.Text, VideoCheck, video, "Видео");
 
-                #region Архивы
-                if (ZipFilesCheck.Checked)
-                {
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\Archives");
-                    OutDataListBox.Items.Add("Архивы:");
-                    string[] zipFiles = { "*.zip", "*.rar", "*.7z", "*.gzip" };
-                    foreach (string expansionZipFiles in zipFiles)
-                    {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionZipFiles, SearchOption.AllDirectories))
-                        {
-                            try
-                            {
-                                string result = Path.GetFileName(file);
-                                File.Move(file, $@"{wayBox_result.Text}\Archives\{result}");
-                                OutDataListBox.Items.Add($"Успешно: {file}");
-                            }
-                            catch
-                            {
-                                OutDataListBox.Items.Add($"Ошибка: {file}");
-                                string result = Path.GetFileName(file);
-                                SystemSounds.Hand.Play();
-                                DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning,
-                                    MessageBoxDefaultButton.Button1);
-                            }
-                        }
-                    }
-                }
-                #endregion
+                        string[] zipFiles = { "*.zip", "*.rar", "*.7z", "*.gzip" };
+                        SortF(textFolderZipFiles.Text, ZipFilesCheck, zipFiles, "Архивы");
 
-                #region Битые фотографии
-                if (BrokerPhotosCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Битые фотографии:");
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\Broken photos");
-                    string[] BrokerPhotos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
-                    foreach (string typePhoto in BrokerPhotos)
-                    {
-                        foreach (string file in Directory.EnumerateFiles(folderBrowserDialog1.SelectedPath, typePhoto, SearchOption.AllDirectories))
+                        string[] psd = { "*.psd" };
+                        SortF(textFolderPsd.Text, PsdCheck, psd, "Фотошоп(psd)");
+
+                        string[] html = { "*.html", "*.htm", "*.mht" };
+                        SortF(textFolderHtml.Text, HtmlCheck, html, "Страницы из интернета");
+
+                        string[] torrent = { "*.torrent" };
+                        SortF(textFolderTorrent.Text, TorrentCheck, torrent, "Торрент файлы");
+
+                        #region Битые фотографии
+                        if (BrokenPhotosCheck.Checked)
                         {
-                            try
+                            Directory.CreateDirectory($@"{wayBox_result.Text}\{textFolderBrokenPhotos.Text}");
+                            OutDataListBox.Items.Add("Битые фотографии:");
+                            string[] BrokenPhotos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
+                            foreach (string typePhoto in BrokenPhotos)
                             {
-                                using (Bitmap type = new Bitmap(file))
+                                foreach (string file in Directory.EnumerateFiles(folderBrowserDialog1.SelectedPath, typePhoto, SearchOption.AllDirectories))
                                 {
-                                }
-                            }
-                            catch (ArgumentException)
-                            {
-                                try
-                                {
-                                    string result = Path.GetFileName(file);
-                                    File.Move(file, $@"{wayBox_result.Text}\Broken photos\{result}");
-                                    OutDataListBox.Items.Add($"Успешно: {file}");
-                                }
-                                catch
-                                {
-                                    OutDataListBox.Items.Add($"Ошибка: {file}");
-                                    string result = Path.GetFileName(file);
-                                    SystemSounds.Hand.Play();
-                                    DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Warning,
-                                        MessageBoxDefaultButton.Button1);
+                                    try
+                                    {
+                                        using (Bitmap type = new Bitmap(file))
+                                        {
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        try
+                                        {
+                                            string result = Path.GetFileName(file);
+                                            File.Move(file, $@"{wayBox_result.Text}\{textFolderBrokenPhotos.Text}\{result}");
+                                            OutDataListBox.Items.Add($"Успешно: {file}");
+                                        }
+                                        catch
+                                        {
+                                            OutDataListBox.Items.Add($"Ошибка: {file}");
+                                            string result = Path.GetFileName(file);
+                                            SystemSounds.Hand.Play();
+                                            DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.Warning,
+                                                MessageBoxDefaultButton.Button1);
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
-                }
-                #endregion
+                        #endregion
 
-                #region Фотошоп (psd)
-                if (PsdCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Фотошоп (psd):");
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\Psd");
-                    foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", "*.psd", SearchOption.AllDirectories))
+                        string[] myEx = { $"*.{MyBox.Text}" };
+                        SortF(MyBox.Text, MyCheck, myEx, MyBox.Text);
+
+                        if (OutDataListBox.Items.Count == 0)
+                        {
+                            OutDataListBox.Items.Add("Файлы с таким расширением не найдены");
+                        }
+                    }
+                    else
                     {
-                        try
-                        {
-                            string result = Path.GetFileName(file);
-                            File.Move(file, $@"{wayBox_result.Text}\Psd\{result}");
-                            OutDataListBox.Items.Add($"Успешно: {file}");
-                        }
-                        catch
-                        {
-                            OutDataListBox.Items.Add($"Ошибка: {file}");
-                            string result = Path.GetFileName(file);
-                            SystemSounds.Hand.Play();
-                            DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning,
-                                MessageBoxDefaultButton.Button1);
-                        }
+                        SystemSounds.Hand.Play();
+                        DialogResult nameBox = MessageBox.Show($"Названия папок не могут быть пустыми!", "Сообщение",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error,
+                            MessageBoxDefaultButton.Button1);
                     }
                 }
-                #endregion
-
-                #region Страницы из интернета
-                if (HtmlCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Страницы из интернета:");
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\Html");
-                    string[] html = { "*.html", "*.htm", "*.mht" };
-                    foreach (string expansionHtml in html)
-                    {
-                        foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", expansionHtml, SearchOption.AllDirectories))
-                        {
-                            try
-                            {
-                                string result = Path.GetFileName(file);
-                                File.Move(file, $@"{wayBox_result.Text}\Html\{result}");
-                                OutDataListBox.Items.Add($"Успешно: {file}");
-                            }
-                            catch
-                            {
-                                OutDataListBox.Items.Add($"Ошибка: {file}");
-                                string result = Path.GetFileName(file);
-                                SystemSounds.Hand.Play();
-                                DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning,
-                                    MessageBoxDefaultButton.Button1);
-                            }
-                        }
-                    }
-                }
-                #endregion
-
-                #region Торрент файлы
-                if (TorrentCheck.Checked)
-                {
-                    OutDataListBox.Items.Add("Торрент файлы:");
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\TorrentFiles");
-                    foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", "*.torrent", SearchOption.AllDirectories))
-                    {
-                        try
-                        {
-                            string result = Path.GetFileName(file);
-                            File.Move(file, $@"{wayBox_result.Text}\TorrentFiles\{result}");
-                            OutDataListBox.Items.Add($"Успешно: {file}");
-                        }
-                        catch
-                        {
-                            OutDataListBox.Items.Add($"Ошибка: {file}");
-                            string result = Path.GetFileName(file);
-                            SystemSounds.Hand.Play();
-                            DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning,
-                                MessageBoxDefaultButton.Button1);
-                        }
-                    }
-                }
-                #endregion
-
-                #region Свое расширение
-                if (MyCheck.Checked)
-                {
-                    OutDataListBox.Items.Add($"{MyBox}:");
-                    Directory.CreateDirectory($@"{wayBox_result.Text}\{MyBox.Text}");
-                    foreach (string file in Directory.EnumerateFiles($"{folderBrowserDialog1.SelectedPath}", $"*.{MyBox.Text}", SearchOption.AllDirectories))
-                    {
-                        try
-                        {
-                            string result = Path.GetFileName(file);
-                            File.Move(file, $@"{wayBox_result.Text}\{MyBox.Text}\{result}");
-                            OutDataListBox.Items.Add($"Успешно: {file}");
-                        }
-                        catch
-                        {
-                            OutDataListBox.Items.Add($"Ошибка: {file}");
-                            string result = Path.GetFileName(file);
-                            SystemSounds.Hand.Play();
-                            DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning,
-                                MessageBoxDefaultButton.Button1);
-                        }
-                    }
-                }
-                #endregion
-
-                if (OutDataListBox.Items.Count == 0)
-                {
-                    OutDataListBox.Items.Add("Файлы с таким расширением не найдены");
-                }
+                
             }
             else
             {
@@ -694,37 +324,27 @@ namespace ProstubeSort
         {
             if (MyCheck.Checked)
             {
+                CheckBox[] ailR = { PhotosCheck, DocCheck, AudioCheck, ZipFilesCheck, HtmlCheck, PdfCheck,
+                TableCheck, VideoCheck, TorrentCheck, PsdCheck, PresentCheck, TxtCheck, BrokenPhotosCheck, AllCheck };
+                foreach (CheckBox r in ailR)
+                {
+                    r.Checked = false;
+                }
                 panel_ButtonExceptMy.Enabled = false;
-                PhotosCheck.Checked = false;
-                DocCheck.Checked = false;
-                AudioCheck.Checked = false;
-                TxtCheck.Checked = false;
-                VideoCheck.Checked = false;
-                ZipFilesCheck.Checked = false;
-                BrokerPhotosCheck.Checked = false;
                 MyBox.Enabled = true;
+                AllCheck.Enabled = false;
             }
             else
             {
                 panel_ButtonExceptMy.Enabled = true;
                 MyBox.Enabled = false;
                 MyBox.Text = null;
+                AllCheck.Enabled = true;
             }
         }
-
-        private void checkActBroker_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void wayBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void BrokerPhotosCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if (BrokerPhotosCheck.Checked)
+            if (BrokenPhotosCheck.Checked)
             {
                 PhotosCheck.Checked = false;
                 PhotosCheck.Enabled = false;
@@ -758,5 +378,22 @@ namespace ProstubeSort
                 }
             }
         }
+
+        private void advanced_settings_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = false;
+            OutDataListBox.Visible = false;
+            heading.Visible = false;
+            panel_setting.Visible = true;
+        }
+
+        private void mainToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = true;
+            OutDataListBox.Visible = true;
+            heading.Visible = true;
+            panel_setting.Visible = false;
+        }
+
     }
 }
