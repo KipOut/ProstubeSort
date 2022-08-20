@@ -6,12 +6,11 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-    <ApplicationIcon>kisspng-electric-blue-graphic-design-angle-area-public-5ab062b5c26c20.6651072415215090457964.ico</ApplicationIcon>
+    <ApplicationIcon>prostubeSort.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="kisspng-electric-blue-graphic-design-angle-area-public-5ab062b5c26c20.6651072415215090457964.ico" />
+    <Content Include="prostubeSort.ico" />
   </ItemGroup>
 
   <ItemGroup>

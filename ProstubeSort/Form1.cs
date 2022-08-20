@@ -27,7 +27,7 @@ namespace ProstubeSort
         }
         #endregion
 
-        #region Выбор папки для сортировки
+        #region Выбор папки для сортировки/сканирования
         private void button_review_Click(object sender, EventArgs e)
         {
             folderBrowserDialog1 = new FolderBrowserDialog();
@@ -49,10 +49,10 @@ namespace ProstubeSort
         }
         private void button_result_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1 = new FolderBrowserDialog();
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            folderBrowserDialog2 = new FolderBrowserDialog();
+            if (folderBrowserDialog2.ShowDialog() == DialogResult.OK)
             {
-                wayBox_result.Text = folderBrowserDialog1.SelectedPath;
+                wayBox_result.Text = folderBrowserDialog2.SelectedPath;
                 if (wayBox_result.Text.StartsWith("C"))
                 {
                     if (notificC_Check.Checked == true)
@@ -206,107 +206,89 @@ namespace ProstubeSort
             OutDataListBox.Items.Clear();
             if (wayBox.Text.Length != 0 && wayBox_result.Text.Length != 0)
             {
-                string[] namesFolder = { textFolderBrokenPhotos.Text, textFolderHtml.Text, textFolderPresentations.Text,
-                textFolderPsd.Text, textFolderSpreadsheets.Text, textFolderTorrent.Text, textFolderTxt.Text, textFolderZipFiles.Text,
-                textFolder_audio.Text, textFolder_Doc.Text, textFolder_pdf.Text, textFolder_photos.Text, textFolder_Video.Text};
-                foreach (string i in namesFolder)
+                string[] photos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
+                SortF(textFolder_photos.Text, PhotosCheck, photos, "Фотографии");
+
+                string[] doc = { "*.doc", "*.docx", "*.odt" };
+                SortF(textFolder_Doc.Text, DocCheck, doc, "Документы");
+
+                string[] table = { "*.xlsx", "*.xls" };
+                SortF(textFolderSpreadsheets.Text, TableCheck, table, "Электронные таблицы");
+
+                string[] pdf = { "*.pdf" };
+                SortF(textFolder_pdf.Text, PdfCheck, pdf, "Pdf документы");
+
+                string[] present = { "*.ppt", "*.pptx", "*.odp" };
+                SortF(textFolderPresentations.Text, PresentCheck, present, "Презентации");
+
+                string[] audio = { "*.mp3", "*.wav", "*.midi", "*.aac" };
+                SortF(textFolder_audio.Text, AudioCheck, audio, "Аудио");
+
+                string[] txt = { "*.txt" };
+                SortF(textFolderTxt.Text, TxtCheck, txt, "Txt");
+
+                string[] video = { "*.mp4", "*.avi", "*.mkv", "*.wmv", "*.mkv", "*.flv", "mpeg" };
+                SortF(textFolder_Video.Text, VideoCheck, video, "Видео");
+
+                string[] zipFiles = { "*.zip", "*.rar", "*.7z", "*.gzip" };
+                SortF(textFolderZipFiles.Text, ZipFilesCheck, zipFiles, "Архивы");
+
+                string[] psd = { "*.psd" };
+                SortF(textFolderPsd.Text, PsdCheck, psd, "Фотошоп(psd)");
+
+                string[] html = { "*.html", "*.htm", "*.mht" };
+                SortF(textFolderHtml.Text, HtmlCheck, html, "Страницы из интернета");
+
+                string[] torrent = { "*.torrent" };
+                SortF(textFolderTorrent.Text, TorrentCheck, torrent, "Торрент файлы");
+
+                #region Битые фотографии
+                if (BrokenPhotosCheck.Checked)
                 {
-                    if (i.Length > 0)
+                    Directory.CreateDirectory($@"{wayBox_result.Text}\{textFolderBrokenPhotos.Text}");
+                    OutDataListBox.Items.Add("Битые фотографии:");
+                    string[] BrokenPhotos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
+                    foreach (string typePhoto in BrokenPhotos)
                     {
-                        string[] photos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
-                        SortF(textFolder_photos.Text, PhotosCheck, photos, "Фотографии");
-
-                        string[] doc = { "*.doc", "*.docx", "*.odt" };
-                        SortF(textFolder_Doc.Text, DocCheck, doc, "Документы");
-
-                        string[] table = { "*.xlsx", "*.xls" };
-                        SortF(textFolderSpreadsheets.Text, TableCheck, table, "Электронные таблицы");
-
-                        string[] pdf = { "*.pdf" };
-                        SortF(textFolder_pdf.Text, PdfCheck, pdf, "Pdf документы");
-
-                        string[] present = { "*.ppt", "*.pptx", "*.odp" };
-                        SortF(textFolderPresentations.Text, PresentCheck, present, "Презентации");
-
-                        string[] audio = { "*.mp3", "*.wav", "*.midi", "*.aac" };
-                        SortF(textFolder_audio.Text, AudioCheck, audio, "Аудио");
-
-                        string[] txt = { "*.txt" };
-                        SortF(textFolderTxt.Text, TxtCheck, txt, "Txt");
-
-                        string[] video = { "*.mp4", "*.avi", "*.mkv", "*.wmv", "*.mkv", "*.flv", "mpeg" };
-                        SortF(textFolder_Video.Text, VideoCheck, video, "Видео");
-
-                        string[] zipFiles = { "*.zip", "*.rar", "*.7z", "*.gzip" };
-                        SortF(textFolderZipFiles.Text, ZipFilesCheck, zipFiles, "Архивы");
-
-                        string[] psd = { "*.psd" };
-                        SortF(textFolderPsd.Text, PsdCheck, psd, "Фотошоп(psd)");
-
-                        string[] html = { "*.html", "*.htm", "*.mht" };
-                        SortF(textFolderHtml.Text, HtmlCheck, html, "Страницы из интернета");
-
-                        string[] torrent = { "*.torrent" };
-                        SortF(textFolderTorrent.Text, TorrentCheck, torrent, "Торрент файлы");
-
-                        #region Битые фотографии
-                        if (BrokenPhotosCheck.Checked)
+                        foreach (string file in Directory.EnumerateFiles(folderBrowserDialog1.SelectedPath, typePhoto, SearchOption.AllDirectories))
                         {
-                            Directory.CreateDirectory($@"{wayBox_result.Text}\{textFolderBrokenPhotos.Text}");
-                            OutDataListBox.Items.Add("Битые фотографии:");
-                            string[] BrokenPhotos = { "*.png", "*.jpeg", "*.jpg", "*.bmp", "*.gif", "*.tif" };
-                            foreach (string typePhoto in BrokenPhotos)
+                            try
                             {
-                                foreach (string file in Directory.EnumerateFiles(folderBrowserDialog1.SelectedPath, typePhoto, SearchOption.AllDirectories))
+                                using (Bitmap type = new Bitmap(file))
                                 {
-                                    try
-                                    {
-                                        using (Bitmap type = new Bitmap(file))
-                                        {
-                                        }
-                                    }
-                                    catch
-                                    {
-                                        try
-                                        {
-                                            string result = Path.GetFileName(file);
-                                            File.Move(file, $@"{wayBox_result.Text}\{textFolderBrokenPhotos.Text}\{result}");
-                                            OutDataListBox.Items.Add($"Успешно: {file}");
-                                        }
-                                        catch
-                                        {
-                                            OutDataListBox.Items.Add($"Ошибка: {file}");
-                                            string result = Path.GetFileName(file);
-                                            SystemSounds.Hand.Play();
-                                            DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
-                                                MessageBoxButtons.OK,
-                                                MessageBoxIcon.Warning,
-                                                MessageBoxDefaultButton.Button1);
-                                        }
-                                    }
+                                }
+                            }
+                            catch
+                            {
+                                try
+                                {
+                                    string result = Path.GetFileName(file);
+                                    File.Move(file, $@"{wayBox_result.Text}\{textFolderBrokenPhotos.Text}\{result}");
+                                    OutDataListBox.Items.Add($"Успешно: {file}");
+                                }
+                                catch
+                                {
+                                    OutDataListBox.Items.Add($"Ошибка: {file}");
+                                    string result = Path.GetFileName(file);
+                                    SystemSounds.Hand.Play();
+                                    DialogResult nameBox = MessageBox.Show($"В папке назначения уже есть файл {result}", "Сообщение",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Warning,
+                                        MessageBoxDefaultButton.Button1);
                                 }
                             }
                         }
-                        #endregion
-
-                        string[] myEx = { $"*.{MyBox.Text}" };
-                        SortF(MyBox.Text, MyCheck, myEx, MyBox.Text);
-
-                        if (OutDataListBox.Items.Count == 0)
-                        {
-                            OutDataListBox.Items.Add("Файлы с таким расширением не найдены");
-                        }
-                    }
-                    else
-                    {
-                        SystemSounds.Hand.Play();
-                        DialogResult nameBox = MessageBox.Show($"Названия папок не могут быть пустыми!", "Сообщение",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error,
-                            MessageBoxDefaultButton.Button1);
                     }
                 }
-                
+                #endregion
+
+                string[] myEx = { $"*.{MyBox.Text}" };
+                SortF(MyBox.Text, MyCheck, myEx, MyBox.Text);
+
+                if (OutDataListBox.Items.Count == 0)
+                {
+                    OutDataListBox.Items.Add("Файлы с таким расширением не найдены");
+                }
             }
             else
             {
@@ -395,5 +377,9 @@ namespace ProstubeSort
             panel_setting.Visible = false;
         }
 
+        private void panel_setting_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

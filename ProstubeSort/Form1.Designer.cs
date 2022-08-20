@@ -87,6 +87,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.notificC_Check = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip1.SuspendLayout();
             this.panel_all.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -541,6 +542,7 @@
             this.panel_setting.Size = new System.Drawing.Size(615, 779);
             this.panel_setting.TabIndex = 13;
             this.panel_setting.Visible = false;
+            this.panel_setting.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_setting_Paint);
             // 
             // panel4
             // 
@@ -831,5 +833,6 @@
         private TextBox textFolderPresentations;
         private TextBox textFolderSpreadsheets;
         private TextBox textFolderBrokenPhotos;
+        private FolderBrowserDialog folderBrowserDialog2;
     }
 }
